@@ -1,6 +1,6 @@
-const int stepPin = 2; 
-const int dirPin = 5; 
-const int enPin = 8;
+const int stepPin = 4; 
+const int dirPin = 3; 
+const int enPin = 2;
 const int stepDelay = 1000;
 
 void setup() {
