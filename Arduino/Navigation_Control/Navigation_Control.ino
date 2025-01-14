@@ -6,6 +6,7 @@
 
 VL53L0X distanceSensor;
 #define NUM_DISTANCES_TO_STORE 9
+#define BTN_PIN 11
 int previous_distances[NUM_DISTANCES_TO_STORE];
 
 // Define all of our pin #'s
@@ -51,6 +52,7 @@ void setup() {
   pinMode( DirZ,OUTPUT);
   pinMode(StepA,OUTPUT);
   pinMode( DirA,OUTPUT);
+  pinMode( BTN_PIN, INPUT);
 
   delay(1000);
 
@@ -61,7 +63,7 @@ void setup() {
   // performComp2(); //blind navigation V1, calibrated for Cornell Lab arena
   // performComp3(); //navigation with distance sensor
 
-  testWheels2(); //test steppers
+  //testWheels2(); //test steppers
 
   ////Read from distance sensor for debug
   //  while (true) {
@@ -70,7 +72,7 @@ void setup() {
 }
 
 void loop() {
-  testWheels2();
+  testWheels3();
 }
 
 ////Functions////
@@ -520,28 +522,28 @@ void moveWheels(int steps, int half_period) {
 void setChassisMovementDirection(ChassisDirection dir) {
   switch (dir) {
   case FORWARD:
-    digitalWrite(DirX, LOW); 
-    digitalWrite(DirY, HIGH);
-    digitalWrite(DirZ, HIGH);
-    digitalWrite(DirA, LOW);
+    digitalWrite(DirX, 0); 
+    digitalWrite(DirY, 0);
+    digitalWrite(DirZ, 0);
+    digitalWrite(DirA, 0);
     break;
   case BACKWARD:
-    digitalWrite(DirX, HIGH); 
-    digitalWrite(DirY, LOW);
-    digitalWrite(DirZ, LOW);
-    digitalWrite(DirA, HIGH);
+    digitalWrite(DirX, 1); 
+    digitalWrite(DirY, 1);
+    digitalWrite(DirZ, 1);
+    digitalWrite(DirA, 1);
     break;
   case LEFT:
-    digitalWrite(DirX, LOW); 
-    digitalWrite(DirY, LOW);
-    digitalWrite(DirZ, LOW);
-    digitalWrite(DirA, LOW);
+    digitalWrite(DirX, 1); 
+    digitalWrite(DirY, 1);
+    digitalWrite(DirZ, 0);
+    digitalWrite(DirA, 0);
     break;
   case RIGHT:
-    digitalWrite(DirX, HIGH); 
-    digitalWrite(DirY, HIGH);
-    digitalWrite(DirZ, HIGH);
-    digitalWrite(DirA, HIGH);
+    digitalWrite(DirX, 0); 
+    digitalWrite(DirY, 0);
+    digitalWrite(DirZ, 1);
+    digitalWrite(DirA, 1);
     break;
   default:
     break;
@@ -551,16 +553,16 @@ void setChassisMovementDirection(ChassisDirection dir) {
 void setChassisTurnDirection(ChassisDirection dir) {
   switch (dir) {
   case LEFT:
-    digitalWrite(DirX, HIGH); 
-    digitalWrite(DirY, HIGH);
-    digitalWrite(DirZ, LOW);
-    digitalWrite(DirA, LOW);
+    digitalWrite(DirX, 0); 
+    digitalWrite(DirY, 1);
+    digitalWrite(DirZ, 1);
+    digitalWrite(DirA, 0);
     break;
   case RIGHT:
-    digitalWrite(DirX, LOW); 
-    digitalWrite(DirY, LOW);
-    digitalWrite(DirZ, HIGH);
-    digitalWrite(DirA, HIGH);
+    digitalWrite(DirX, 1); 
+    digitalWrite(DirY, 0);
+    digitalWrite(DirZ, 0);
+    digitalWrite(DirA, 1);
     break;
   default:
     break;
@@ -571,13 +573,14 @@ void testWheels() {
   // This shows me which wheel is which (X,Y,A,Z) without having to
   //  manually trace what wire from which motor goes to which part of the board
 
-  moveWheel(20, DirX, HIGH, StepX);
+  moveWheel(20, DirX, 1, StepX);
   delay(500);
-  moveWheel(20, DirY, HIGH, StepY);
+  moveWheel(20, DirY, 1, StepY);
   delay(500);
-  moveWheel(20, DirA, HIGH, StepA);
+  moveWheel(20, DirA, 1, StepA);
   delay(500);
-  moveWheel(20, DirZ, HIGH, StepZ);
+  moveWheel(20, DirZ, 1, StepZ);
+  delay(2000);
 }
 
 void moveWheel(int Step, int DirPin, bool DirState, int StepPin) {
@@ -593,7 +596,7 @@ void moveWheel(int Step, int DirPin, bool DirState, int StepPin) {
 
 void testWheels2() {
   // Move straight then turn left.
-  moveChassis(FORWARD,300,5000);
+  moveChassis(FORWARD,1000,200);
   // void moveChassis(ChassisDirection dir, int steps, int half_period)
   // ChassisDirection can be FORWARD/LEFT/RIGHT.
   // steps is the number steps to move for the motor.
@@ -601,4 +604,46 @@ void testWheels2() {
   delay(1000);
   //  Move away from wall a little
   moveChassis(LEFT,350,1000);
+}
+
+bool isMoving = false; // Flag to keep track if the stepper is moving
+
+void testWheels3() {
+  // This test illustrate the switch button. 
+
+  // Read the button state
+  bool buttonState = digitalRead(BTN_PIN); // Invert the button state, as we're using a Normally Open button
+
+  if (buttonState) {
+    // Button has been pressed, move the Z motor to the desired position
+    //while (true) {
+      // test moves
+      moveChassis(FORWARD,3000,300);
+      delay(500);
+      moveChassis(BACKWARD,3000,300);
+      delay(500);
+      moveChassis(LEFT,3000,300);
+      delay(500);
+      moveChassis(RIGHT,3000,300);
+      delay(500);
+      // //  Test turns
+      turnChassis(LEFT,3000,600);
+      delay(500);
+      turnChassis(RIGHT,3000,600);
+      delay(500);
+    //}
+  }
+
+  // if (!buttonState) {
+  //   // Button has been released, stop the Z motor
+  //   isMoving = false; 
+  //   // moveChassis(LEFT,0,0); // Stop the motor by stepping 0 steps
+  // }
+
+  // If the stepper is still moving, continue to step
+  // if (isMoving) {
+  //   testWheels2();
+  // }
+  Serial.println(buttonState);
+
 }
