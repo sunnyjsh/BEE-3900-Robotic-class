@@ -52,7 +52,7 @@ void setup() {
   pinMode( DirZ,OUTPUT);
   pinMode(StepA,OUTPUT);
   pinMode( DirA,OUTPUT);
-  pinMode( BTN_PIN, INPUT);
+  pinMode( BTN_PIN, INPUT_PULLUP);
 
   delay(1000);
 
@@ -72,7 +72,10 @@ void setup() {
 }
 
 void loop() {
-  testWheels3();
+  // Use testWheels() function to identify the connection between the motors and the CNC shield.
+  // Each wheel is activated one after another.
+  // The direction pins are set to move the car FORWARD.
+  testWheels();
 }
 
 ////Functions////
@@ -573,13 +576,13 @@ void testWheels() {
   // This shows me which wheel is which (X,Y,A,Z) without having to
   //  manually trace what wire from which motor goes to which part of the board
 
-  moveWheel(20, DirX, 1, StepX);
+  moveWheel(200, DirX, 0, StepX);
   delay(500);
-  moveWheel(20, DirY, 1, StepY);
+  moveWheel(200, DirY, 0, StepY);
   delay(500);
-  moveWheel(20, DirA, 1, StepA);
+  moveWheel(200, DirA, 0, StepA);
   delay(500);
-  moveWheel(20, DirZ, 1, StepZ);
+  moveWheel(200, DirZ, 0, StepZ);
   delay(2000);
 }
 
@@ -612,9 +615,9 @@ void testWheels3() {
   // This test illustrate the switch button. 
 
   // Read the button state
-  bool buttonState = digitalRead(BTN_PIN); // Invert the button state, as we're using a Normally Open button
+  bool buttonState = !digitalRead(BTN_PIN); // Invert the button state, as we're using a Normally Open button
 
-  if (buttonState) {
+  if (true) {
     // Button has been pressed, move the Z motor to the desired position
     //while (true) {
       // test moves
