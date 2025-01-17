@@ -3,8 +3,11 @@
 // Include the stuff we need for the distance sensor
 #include <Wire.h>
 #include <VL53L0X.h>
+#include <Servo.h>
 
 VL53L0X distanceSensor;
+Servo myServo; // Create a servo object
+
 #define NUM_DISTANCES_TO_STORE 9
 #define BTN_PIN 11
 int previous_distances[NUM_DISTANCES_TO_STORE];
@@ -54,6 +57,8 @@ void setup() {
   pinMode( DirA,OUTPUT);
   pinMode( BTN_PIN, INPUT_PULLUP);
 
+  myServo.attach(10); // Attach the servo to pin 10
+
   delay(1000);
 
   Serial.println("Starting");
@@ -72,10 +77,14 @@ void setup() {
 }
 
 void loop() {
-  // Use testWheels() function to identify the connection between the motors and the CNC shield.
-  // Each wheel is activated one after another.
-  // The direction pins are set to move the car FORWARD.
-  testWheels();
+  // move wheels one-by-one, in the order X, Y, A, Z, to help identify motor connections
+  // testWheels(); 
+
+  // move the chassis forward, then backward, repetitively
+  testWheels2();
+
+  // move the servo motor to angles 60, 90, 120 degrees
+  testServo();
 }
 
 ////Functions////
@@ -597,21 +606,9 @@ void moveWheel(int Step, int DirPin, bool DirState, int StepPin) {
  }
 }
 
-void testWheels2() {
-  // Move straight then turn left.
-  moveChassis(FORWARD,1000,200);
-  // void moveChassis(ChassisDirection dir, int steps, int half_period)
-  // ChassisDirection can be FORWARD/LEFT/RIGHT.
-  // steps is the number steps to move for the motor.
-  // half_period is the delay time between each current direction alternation, in microsecond. The smaller the half_period, the faster the rotation speed. 
-  delay(1000);
-  //  Move away from wall a little
-  moveChassis(LEFT,350,1000);
-}
-
 bool isMoving = false; // Flag to keep track if the stepper is moving
 
-void testWheels3() {
+void testWheels2() {
   // This test illustrate the switch button. 
 
   // Read the button state
@@ -625,15 +622,15 @@ void testWheels3() {
       delay(500);
       moveChassis(BACKWARD,3000,300);
       delay(500);
-      moveChassis(LEFT,3000,300);
-      delay(500);
-      moveChassis(RIGHT,3000,300);
-      delay(500);
-      // //  Test turns
-      turnChassis(LEFT,3000,600);
-      delay(500);
-      turnChassis(RIGHT,3000,600);
-      delay(500);
+      // moveChassis(LEFT,3000,300);
+      // delay(500);
+      // moveChassis(RIGHT,3000,300);
+      // delay(500);
+      // // //  Test turns
+      // turnChassis(LEFT,3000,600);
+      // delay(500);
+      // turnChassis(RIGHT,3000,600);
+      // delay(500);
     //}
   }
 
@@ -648,5 +645,18 @@ void testWheels3() {
   //   testWheels2();
   // }
   Serial.println(buttonState);
+}
 
+void testServo() {
+  // Move servo
+  myServo.write(60);
+  delay(1000); // Wait for 1 second
+
+  // Move the servo to 90 degrees
+  myServo.write(90);
+  delay(1000); // Wait for 1 second
+
+  // Move the servo to 180 degrees
+  myServo.write(120);
+  delay(1000); // Wait for 1 second
 }
