@@ -562,24 +562,24 @@ void setChassisMovementDirection(ChassisDirection dir) {
   }
 }
 
-void setChassisTurnDirection(ChassisDirection dir) {
-  switch (dir) {
-  case LEFT:
-    digitalWrite(DirX, 0); 
-    digitalWrite(DirY, 1);
-    digitalWrite(DirZ, 1);
-    digitalWrite(DirA, 0);
-    break;
-  case RIGHT:
-    digitalWrite(DirX, 1); 
-    digitalWrite(DirY, 0);
-    digitalWrite(DirZ, 0);
-    digitalWrite(DirA, 1);
-    break;
-  default:
-    break;
-  }
-}
+// void setChassisTurnDirection(ChassisDirection dir) {
+//   switch (dir) {
+//   case LEFT:
+//     digitalWrite(DirX, 0); 
+//     digitalWrite(DirY, 1);
+//     digitalWrite(DirZ, 1);
+//     digitalWrite(DirA, 0);
+//     break;
+//   case RIGHT:
+//     digitalWrite(DirX, 1); 
+//     digitalWrite(DirY, 0);
+//     digitalWrite(DirZ, 0);
+//     digitalWrite(DirA, 1);
+//     break;
+//   default:
+//     break;
+//   }
+// }
 
 void testWheels() {
   // This shows me which wheel is which (X,Y,A,Z) without having to
