@@ -9,7 +9,7 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 #define DELAYTIME 50   // Delay in milliseconds between steps (controls speed)
 
 // Define servo channels on the PCA9685
-const int baseChannel = 0;      c:\Users\zl948\Downloads\Arduino\arduino_take_picture\arduino_take_picture.ino
+const int baseChannel = 0;      
 const int shoulderChannel = 1;  
 const int elbowChannel = 2;     
 const int wristChannel = 3;     
@@ -48,9 +48,7 @@ void setup() {
 //  moveServoSlowly(gripperChannel, 0, 0, DELAYTIME);
 }
 
-void loop() {
-  // Example slower motion sequence
-  
+void loop() {  
   // Move base to 45 degrees
   moveServoSlowly(baseChannel, 90, 45, DELAYTIME);
   delay(1000);
