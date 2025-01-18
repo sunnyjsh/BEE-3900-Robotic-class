@@ -1,4 +1,4 @@
-/* Arduino with multiple servos example code */
+/* Arduino with multiple servos to control a robotic arm */
 
 #include <Servo.h>
 
