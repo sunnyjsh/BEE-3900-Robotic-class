@@ -622,15 +622,15 @@ void testWheels2() {
       delay(500);
       moveChassis(BACKWARD,3000,300);
       delay(500);
-      // moveChassis(LEFT,3000,300);
-      // delay(500);
-      // moveChassis(RIGHT,3000,300);
-      // delay(500);
-      // // //  Test turns
-      // turnChassis(LEFT,3000,600);
-      // delay(500);
-      // turnChassis(RIGHT,3000,600);
-      // delay(500);
+      moveChassis(LEFT,3000,300);
+      delay(500);
+      moveChassis(RIGHT,3000,300);
+      delay(500);
+      // //  Test turns
+      turnChassis(LEFT,3000,600);
+      delay(500);
+      turnChassis(RIGHT,3000,600);
+      delay(500);
     //}
   }
 
