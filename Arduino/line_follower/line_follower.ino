@@ -72,11 +72,9 @@ void loop() {
     forward();
   }
   else if(!LT_R) { 
-    right();
-//    while(LT_R);                             
+    right();                  
   }   
   else if(!LT_L) {
     left();
-//    while(LT_L);  
   }
 }
