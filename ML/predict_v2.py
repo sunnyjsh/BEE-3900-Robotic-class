@@ -191,7 +191,7 @@ def inverse_kinematics(x, y):
     """
     
     # Your code goes hrere
-    angles = (np.random.rand(4) * 20+90).astype(int)
+    angles = (np.random.rand(4) * 60 + 60).astype(int)
     
     return angles
 
