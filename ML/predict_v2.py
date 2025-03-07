@@ -196,7 +196,7 @@ def inverse_kinematics(x, y):
     return angles
 
 # Function to send a number to the Arduino
-def send_number(number, arduino):
+def send_number(number):
     """
     Write an integer to the serial buffer to communicate with Arduino.
     """
@@ -254,7 +254,7 @@ def command_arduino(port, baud_rate):
                 print("angles: " + ", ".join(map(str, angles)))
                 # send angles to Arduino
                 for angle in angles:
-                    send_number(angle, arduino)    
+                    send_number(angle)    
         else:
             time.sleep(1)
 
