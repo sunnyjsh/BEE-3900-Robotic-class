@@ -11,45 +11,23 @@ import tflite_runtime.interpreter as tf
 import numpy as np
 from PIL import Image
 from object_detection import ObjectDetection
-# from motor_motions import Motors
 import cv2
 import helper
 import colorsys
 from time import time
 
-
+# model file name and label file name
 MODEL_FILENAME = 'Final.tflite'
 LABELS_FILENAME = '500.txt'
-
-# 串口配置（请根据实际情况修改端口号）
-SERIAL_PORT = "/dev/serial/by-id/usb-Arduino__www.arduino.cc__0042_95137313932351603002-if00"  # 或者 'COMx'（Windows 用户）
-# SERIAL_PORT = 'COM30'
-
-BAUD_RATE = 115200
-
-# 连接 Arduino
-try:
-    arduino = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=1)
-    print("Arduino Connected")
-    # 初始化：发送G0指令
-    arduino.write("G0\n".encode())
-    print("Sent initialization command: G0")
-except Exception as e:
-    print("Failed to connect to Arduino:", str(e))
-    arduino = None
 
 class TFLiteObjectDetection(ObjectDetection):
     """Object Detection class for TensorFlow Lite"""
     def __init__(self, model_filename, labels):
         super(TFLiteObjectDetection, self).__init__(labels)	
-        
-        
         self.interpreter = tf.Interpreter(model_path=model_filename)
         self.interpreter.allocate_tensors()
-        self.interpreter.invoke()  # 预热，可能会提升推理速度
+        self.interpreter.invoke()  # Warm-up, which may improve inference speed
 
-        
-        
         self.interpreter.allocate_tensors()
         self.input_index = self.interpreter.get_input_details()[0]['index']
         self.output_index = self.interpreter.get_output_details()[0]['index']
@@ -65,23 +43,6 @@ class TFLiteObjectDetection(ObjectDetection):
         self.interpreter.invoke()
         return self.interpreter.get_tensor(self.output_index)[0]
     
-def send_color_to_arduino(color):
-    """将颜色数据发送给 Arduino"""
-    if arduino:
-        arduino.write(f"{color}\n".encode())  # 发送颜色并换行
-        print(f"Sent to Arduino: {color}")
-
-def send_led_off_delayed():
-    """延迟2秒发送LED_OFF指令"""
-    def send_off():
-        if arduino:
-            arduino.write("LED_OFF\n".encode())
-            print("Sent to Arduino: LED_OFF")
-    
-    # 创建定时器，2秒后执行send_off函数
-    timer = Timer(2.0, send_off)
-    timer.start()
-
 def main(image_filename=''):
     # Load labels
     with open(LABELS_FILENAME, 'r') as f:
@@ -91,8 +52,8 @@ def main(image_filename=''):
     
     video_object = cv2.VideoCapture(0)
     
-    video_object.set(cv2.CAP_PROP_FPS, 30)  # 设定摄像头帧率为 30 FPS
-    video_object.set(cv2.CAP_PROP_FRAME_WIDTH, 640)  # 降低摄像头分辨率
+    video_object.set(cv2.CAP_PROP_FPS, 30)  # Frame rate 30 FPS
+    video_object.set(cv2.CAP_PROP_FRAME_WIDTH, 640)  # Image width
     video_object.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 
     
@@ -106,8 +67,6 @@ def main(image_filename=''):
     # the time image shows on the screen (ms)
     t_show = 500
     
-    # intialize motors
-    # motor = Motors()
     
     #try:
     while(start):
@@ -191,26 +150,8 @@ def main(image_filename=''):
                         
                         avgHSV = colorsys.rgb_to_hsv(r / 255.0, g / 255.0, b / 255.0)  # Normalize to 0–1
                         brightness = avgHSV[2]
-                        
+                        # In HSV (Hue, Saturation, Value) color space, a lower value indicates a darker color
                         print(f"Brightness= {avgHSV[2]}")
-
-########################################################
-                        
-                        # motor controls
-                        # motor.motor_control(motor.check_species(pred['tagName']))
-                        # start = False
-                                            # 根据检测到的对象发送相应颜色到 Arduino
-#                         if pred['tagName'] == 'good_egg':
-#                             send_color_to_arduino("blue")
-#                         elif pred['tagName'] == 'big_good_egg':
-#                             send_color_to_arduino("green")
-#                         elif pred['tagName'] == 'bad_egg':
-#                             send_color_to_arduino("red")
-                        # 直接把检测到的标签名发送给 Arduino
-                        send_color_to_arduino(pred['tagName'])
-                        
-                        # 发送完鸡蛋类型后，启动2秒延迟定时器发送LED_OFF
-                        send_led_off_delayed()
 
                 if found :
                     cv2.imshow('Frames',augmented_image)
@@ -218,19 +159,12 @@ def main(image_filename=''):
                     t_0 = time()
                     
                 # Reset the time counter
-                delta = 0
-                
+                delta = 0                
             
             # show the frame on the newly created image window
             if not found:
                 cv2.imshow('Frames',augmented_image)
                 cv2.waitKey(1)	
     
-        
-    #except:
-       # print("Video has ended..")
-
-
-
 if __name__ == '__main__':
     main()
