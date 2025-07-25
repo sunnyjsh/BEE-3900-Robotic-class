@@ -1,11 +1,3 @@
-/*
-  Code written by Shaun Armstrong for the amomii Glow.
-
-  This code blinks the green pixel in a sequence of three pixels 
-  with red, green, and blue colors, respectively.
-  
-*/
-
 #include <FastLED.h>
 #define NUM_LEDS 8
 #define DATA_PIN 9
