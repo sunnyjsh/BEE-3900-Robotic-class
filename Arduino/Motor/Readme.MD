@@ -34,3 +34,15 @@ Servo motors have three wires: signal, +5V, and GND[cite: 68, 69, 70, 71, 72, 73
 ### PWM Servo Motor Control
 
 A 16-channel PWM servo driver can be used to control multiple servos[cite: 141]. You will need to install the "Adafruit PWM Servo Driver Library" in the Arduino IDE[cite: 142].
+
+## Robotic Arm and Grabbing Mechanisms
+
+This course will involve building and programming a robotic arm with a grabbing mechanism.
+
+### Grabbing Mechanisms
+
+[cite_start]Various grabbing mechanisms can be designed and built, including three-bar and four-bar linkages[cite: 157, 164].
+
+### Claw Grabber
+
+[cite_start]For the provided claw grabber, you will need to determine the full range of motion by starting with a small angular range (e.g., 90 to 100 degrees) and gradually expanding it[cite: 169, 171]. [cite_start]Record these values[cite: 172].
