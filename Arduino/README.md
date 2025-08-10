@@ -1,4 +1,4 @@
-# BEE 3900 Robotic Class Guide
+# Arduino Class Guide
 
 This document provides a comprehensive overview of the materials and procedures for the BEE 3900 Robotic class, as presented by Professor Sunny Jung of Cornell University.
 
@@ -70,3 +70,33 @@ The Arduino Integrated Development Environment (IDE) is used to write and upload
 ### Installing Libraries
 
 You may need to install libraries to control certain components. For example, the "FastLED" library is used for controlling addressable LEDs.
+
+## Important Notes and Lab Procedure
+
+This document outlines the final important procedures and safety reminders for working on your robots in the lab. Please read these carefully before continuing.
+
+### 1. Safety First: Securing Your Robot
+
+When you are working on your robot's code or making adjustments, it is critical that you **do not leave it resting directly on the table with its wheels touching the surface.**
+
+**Reasoning:**
+A simple coding error or an unexpected command can cause the motors to activate suddenly. If the robot's wheels are on the table, it could drive off the edge and fall, causing significant damage to the chassis, electronics, and sensors.
+
+**Correct Procedure:**
+Always use the provided **wooden blocks or other stable supports** to lift the robot's frame off the surface. This ensures that the wheels can spin freely for testing without the robot moving from its spot.
+
+### 2. Teamwork and Task Rotation
+
+To ensure everyone gets equal hands-on experience, your team should rotate through the three main tasks. Each team member should have the opportunity to lead the setup and programming for each of the following components:
+
+* **Task 1: Mecanum Wheels:** Implementing the code to control the robot's movement.
+* **Task 2: Distance Sensor:** Integrating the Time-of-Flight sensor to measure distances.
+* **Task 3: Line Sensor:** Calibrating and programming the IR line-following sensor module.
+
+This approach ensures that every member of the team understands each part of the robot's system, which is crucial for effective troubleshooting and collaboration.
+
+### 3. Making the Most of Your Time
+
+If you find yourself with extra waiting time while a teammate is working on a task, please use that time productively.
+
+* **Review Materials:** Check the videos, documents, and code examples provided in the class materials. Reviewing these resources can help you better understand the concepts and prepare you for the next task.
