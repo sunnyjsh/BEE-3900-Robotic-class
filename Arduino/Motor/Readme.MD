@@ -2,6 +2,8 @@
 
 This course will cover three main types of motors: DC motors, stepper motors, and servo motors.
 
+
+
 ### Motor Types
 
 * **DC Motor:**
