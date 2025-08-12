@@ -18,7 +18,7 @@ BAUD_RATE = 115200
 # Your ThingSpeak Write API Key
 # Field 1 = Temperature
 # Field 2 = Humidity
-THINGSPEAK_API_KEY = '0JA5RQ661PD4ALSD' # <--- Updated with your key
+THINGSPEAK_API_KEY = 'API KEY' # <--- Updated with your key
 
 # ThingSpeak API URL
 THINGSPEAK_URL = 'https://api.thingspeak.com/update'
