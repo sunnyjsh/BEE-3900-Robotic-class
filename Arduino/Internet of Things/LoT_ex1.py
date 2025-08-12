@@ -9,8 +9,8 @@ import time
 
 # --- Configuration ---
 # The serial port your Arduino is connected to.
-# On Linux, it's often /dev/ttyACM0 or /dev/ttyUSB0
-SERIAL_PORT = '/dev/serial/by-id/usb-Arduino__www.arduino.cc__0043_5573132383535140B0E1-if00' 
+# On Linux, you can get the ID by typing "ls -l /dev/serial/by-id/" in terminal. 
+SERIAL_PORT = '/dev/serial/by-id/usb-Arduino__www.arduino.cc__0043_XXXXXXXXXXXXXXXXXXX-if00' 
 
 # BAUD RATE MUST MATCH THE ARDUINO SKETCH (Serial.begin(115200))
 BAUD_RATE = 115200
