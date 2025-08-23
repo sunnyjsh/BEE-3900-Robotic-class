@@ -19,6 +19,29 @@ const int wompMelody[] = { 196, 131 };
 const int wompTempo[] = { 4, 2 };
 const int wompLength = sizeof(wompMelody) / sizeof(int);
 
+// "Golden" from K-Pop: Demon Hunters - Chorus
+const int goldenMelody[] = {
+  // "We're going up, up, up"
+  494, 554, 587,
+  // "it's our mo-ment"
+  659, 587, 554,
+  // "you know to-ge-ther we're glow-ing"
+  494, 494, 554, 587, 554, 494, 440,
+  // "gon-na be, gon-na be gold-en"
+  440, 494, 440, 494, 440, 370
+};
+const int goldenTempo[] = {
+  // up, up, up
+  8, 8, 4,
+  // mo-ment
+  8, 8, 4,
+  // to-ge-ther we're glow-ing
+  16, 16, 8, 8, 8, 8, 4,
+  // gon-na be, gon-na be gold-en
+  16, 16, 16, 16, 8, 4
+};
+const int goldenLength = sizeof(goldenMelody) / sizeof(int);
+
 void setup() {
   // put your setup code here, to run once:
   // Initialize buzzer pin
@@ -36,6 +59,9 @@ void loop() {
   delay(3000);
   playTune(failMelody, failTempo, failLength);
   delay(3000);
+  playTune(goldenMelody, goldenTempo, goldenLength);
+  delay(3000);
+
 }
 
 /**
