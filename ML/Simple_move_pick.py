@@ -254,50 +254,50 @@ def execute_pickup_and_return_sequence():
     printing the distance at each point.
     """
     try:
-        print("\n--- Starting 3-Point Environment Scan ---")
-
-        # 1. Scan Left
-        print("\nStep 1: Scanning Left...")
-        send_arm("GL")  # Command arm to rotate to the left position
-        distance_left = execute_scan()
-        if distance_left is not None:
-            print(f"--> Left Distance: {distance_left}mm")
-        else:
-            print("--> Left scan failed.")
-
-        time.sleep(1) # Pause between actions
-
-        # 2. Scan Right
-        print("\nStep 2: Scanning Right...")
-        send_arm("GR")  # Command arm to rotate to the right position
-        distance_right = execute_scan()
-        if distance_right is not None:
-            print(f"--> Right Distance: {distance_right}mm")
-        else:
-            print("--> Right scan failed.")
-
-        time.sleep(1) # Pause
-
-        # 3. Scan Center and Reset Position
-        print("\nStep 3: Scanning Center...")
-        send_arm("GC")  # Command arm to rotate back to the center
-        distance_center = execute_scan()
-        if distance_center is not None:
-            print(f"--> Center Distance: {distance_center}mm")
-        else:
-            print("--> Center scan failed.")
-
-        # Initialize robot state
-        yaw = query_yaw_from_nav()
-        print(f"Starting sequence with initial yaw: {yaw:.1f} degrees")
-        
+#         print("\n--- Starting 3-Point Environment Scan ---")
+# 
+#         # 1. Scan Left
+#         print("\nStep 1: Scanning Left...")
+#         send_arm("GL")  # Command arm to rotate to the left position
+#         distance_left = execute_scan()
+#         if distance_left is not None:
+#             print(f"--> Left Distance: {distance_left}mm")
+#         else:
+#             print("--> Left scan failed.")
+# 
+#         time.sleep(1) # Pause between actions
+# 
+#         # 2. Scan Right
+#         print("\nStep 2: Scanning Right...")
+#         send_arm("GR")  # Command arm to rotate to the right position
+#         distance_right = execute_scan()
+#         if distance_right is not None:
+#             print(f"--> Right Distance: {distance_right}mm")
+#         else:
+#             print("--> Right scan failed.")
+# 
+#         time.sleep(1) # Pause
+# 
+#         # 3. Scan Center and Reset Position
+#         print("\nStep 3: Scanning Center...")
+#         send_arm("GC")  # Command arm to rotate back to the center
+#         distance_center = execute_scan()
+#         if distance_center is not None:
+#             print(f"--> Center Distance: {distance_center}mm")
+#         else:
+#             print("--> Center scan failed.")
+# 
+#         # Initialize robot state
+#         yaw = query_yaw_from_nav()
+#         print(f"Starting sequence with initial yaw: {yaw:.1f} degrees")
+#         
         # EX) Complex motions
-        send_nav("F30")
+        send_nav("F30") 
         send_arm("G1")
         send_nav("B30")
         send_arm("G2")
-        # send_nav("MR180")
-        # send_nav("ML180")
+        send_nav("MR10")
+        send_nav("ML30")
         send_arm("G0")
 
         print("\n Scan sequence complete!")
