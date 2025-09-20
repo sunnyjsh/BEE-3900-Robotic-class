@@ -149,13 +149,10 @@ void setup() {
   pinMode(StepA, OUTPUT); pinMode(DirA, OUTPUT);
   pinMode(BTN_PIN, INPUT_PULLUP);
 
-    // 初始化蜂鸣器管脚
   pinMode(BUZZER_PIN, OUTPUT);
   digitalWrite(BUZZER_PIN, LOW);
 
-  // 系统自检完成，蜂鸣一次提示
-  // 方法一：如果是被动蜂鸣器（需要频率），用 tone()
-  tone(BUZZER_PIN, 1000, 200);   // 1kHz，响 200ms
+  tone(BUZZER_PIN, 1000, 200);   // 1kHz, 200ms
 
   trackRotationStart();
 
@@ -698,16 +695,16 @@ void measureDistances() {
 void playMarioTune() {
   for (int i = 0; i < marioLength; i++) {
     int note = marioMelody[i];
-    int duration = 1000 / marioTempo[i];  // 基本拍长：1000ms/节拍数
+    int duration = 1000 / marioTempo[i];  
     if (note == 0) {
       // 休止符
       delay(duration);
     } else {
       tone(BUZZER_PIN, note, duration);
-      delay(duration * 1.3);  // 多延一点让音符更分明
+      delay(duration * 1.3);  
     }
   }
-  noTone(BUZZER_PIN);  // 停止蜂鸣
+  noTone(BUZZER_PIN);  
 }
 
 void playTwinkleTune() {
