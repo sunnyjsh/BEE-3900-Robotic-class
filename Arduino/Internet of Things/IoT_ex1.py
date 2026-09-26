@@ -1,4 +1,4 @@
-# pi_uploader_dht11.py
+# IoT_ex1.py
 # This script is modified to read humidity and temperature from the DHT11
 # Arduino sketch provided by the user.
 # VERSION 3: Updated API Key and swapped fields as per user request.
