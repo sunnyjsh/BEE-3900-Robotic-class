@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sensor Data Dashboard</title>
+
+    <style>
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            background-color: #f4f4f4;
+
+            margin: 0;
+
+            padding: 20px;
+
+        }
+
+        h1 {
+
+            text-align: center;
+
+            color: #333;
+
+        }
+
+        .dashboard {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            justify-content: center;
+
+            gap: 20px;
+
+        }
+
+        .chart-container {
+
+            background-color: #fff;
+
+            padding: 15px;
+
+            border-radius: 8px;
+
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+        }
+
+        iframe {
+
+            border: 1px solid #cccccc;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+
+    <h1>Environment Sensor Dashboard</h1>
+
+
+
+    <div class="dashboard">
+
+        <!-- Field 1: Temperature -->
+
+        <div class="chart-container">
+
+            <h3>Temperature</h3>
+
+            <iframe width="450" height="260" src="https://thingspeak.com/channels/3033294/charts/1?api_key=YOUR_READ_API_KEY&dynamic=true&results=60&type=line"></iframe>
+
+        </div>
+
+
+
+        <!-- Field 2: Humidity -->
+
+        <div class="chart-container">
+
+            <h3>Humidity</h3>
+
+            <iframe width="450" height="260" src="https://thingspeak.com/channels/3033294/charts/2?api_key=YOUR_READ_API_KEY&dynamic=true&results=60&type=line"></iframe>
+
+        </div>
+
+
+
+        <!-- Field 3: Alcohol -->
+
+        <div class="chart-container">
+
+            <h3>Alcohol</h3>
+
+            <iframe width="450" height="260" src="https://thingspeak.com/channels/3033294/charts/3?api_key=YOUR_READ_API_KEY&dynamic=true&results=60&type=line"></iframe>
+
+        </div>
+
+
+
+        <!-- Field 4: CO2 -->
+
+        <div class="chart-container">
+
+            <h3>CO2</h3>
+
+            <iframe width="450" height="260" src="https://thingspeak.com/channels/3033294/charts/4?api_key=YOUR_READ_API_KEY&dynamic=true&results=60&type=line"></iframe>
+
+        </div>
+
+
+
+        <!-- Field 5: Gas -->
+
+        <div class="chart-container">
+
+            <h3>Gas</h3>
+
+            <iframe width="450" height="260" src="https://thingspeak.com/channels/3033294/charts/5?api_key=YOUR_READ_API_KEY&dynamic=true&results=60&type=line"></iframe>
+
+        </div>
+
+    </div>
+
+
+
+</body>
+
+</html>
